@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.bee.leetcode.R;
+import com.bee.leetcode.net.RetrofitFactory;
 
 public class MainActivity extends AppCompatActivity {
 
