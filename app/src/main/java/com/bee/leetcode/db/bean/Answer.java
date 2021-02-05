@@ -1,35 +1,7 @@
 package com.bee.leetcode.db.bean;
 
+//个人做题信息
 public class Answer {
-    private static int code;
-    private Data data;
-    private static String message;
-
-    public static int getCode() {
-        return code;
-    }
-
-    public static void setCode(int code) {
-        Answer.code = code;
-    }
-
-    public Data getData() {
-        return data;
-    }
-
-    public void setData(Data data) {
-        this.data = data;
-    }
-
-    public static String getMessage() {
-        return message;
-    }
-
-    public static void setMessage(String message) {
-        Answer.message = message;
-    }
-
-    public static class Data{
         private int code;
         private int solved;
         private int easy;
@@ -76,4 +48,4 @@ public class Answer {
             this.diff = diff;
         }
     }
-}
+
