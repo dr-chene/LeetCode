@@ -16,13 +16,14 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
  */
 public class RxjavaUtil {
 
+
     /**
      * 对rxjava flowable的封装
      * @param flow 监听的flowable对象，从网络和本地获取
      * @param subscriber 对flow发射的结果的订阅器，在此处处理返回的数据结果
      * @param <T> 数据bean类
      */
-    public static <T> void resultRequest(Flowable<T> flow, FlowableSubscriber<T> subscriber){
+    public static <T> void dataRequest(Flowable<T> flow, FlowableSubscriber<T> subscriber){
         flow.compose(flowableToMain())
                 .subscribe(subscriber);
     }
