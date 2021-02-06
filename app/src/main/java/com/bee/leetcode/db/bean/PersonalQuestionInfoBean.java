@@ -1,7 +1,7 @@
 package com.bee.leetcode.db.bean;
 
 //个人做题信息
-public class Answer {
+public class PersonalQuestionInfoBean {
         private int code;
         private int solved;
         private int easy;

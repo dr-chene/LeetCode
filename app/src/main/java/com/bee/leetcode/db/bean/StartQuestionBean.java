@@ -1,7 +1,7 @@
 package com.bee.leetcode.db.bean;
 
 //开始题目
-public class StartQuestion {
+public class StartQuestionBean {
     private int code;
     private String title;
     private String questionId;

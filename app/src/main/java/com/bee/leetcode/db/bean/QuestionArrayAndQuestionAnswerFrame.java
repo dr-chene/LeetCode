@@ -1,12 +1,14 @@
 package com.bee.leetcode.db.bean;
 
 import java.util.List;
-//题目列表展示
-public class AllQuestion {
+
+//题目列表展示与题解列表，泛型中传入QuestionAnswerBean或者QuestionArrayBean
+
+public class QuestionArrayAndQuestionAnswerFrame<T> {
 
         private String message;
         private int code;
-        private List<QuestionArray> data;
+        private List<T> data;
 
         public String getMessage() {
             return message;
@@ -24,11 +26,11 @@ public class AllQuestion {
             this.code = code;
         }
 
-        public List<QuestionArray> getData() {
+        public List<T> getData() {
             return data;
         }
 
-        public void setData(List<QuestionArray> data) {
+        public void setData(List<T> data) {
             this.data = data;
         }
     }

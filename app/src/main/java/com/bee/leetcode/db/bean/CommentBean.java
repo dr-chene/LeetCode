@@ -2,13 +2,15 @@ package com.bee.leetcode.db.bean;
 
 //评论获取(包括题解评论)
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.List;
 
 public class CommentBean {
     protected long userId;
     protected String userName;
     protected String avatar;
-    protected int thumbup;//点赞数量
+    protected int thumbup ;//点赞数量
     protected boolean isLike;
     protected String content;
     private List<SubCommentBean> subContent;

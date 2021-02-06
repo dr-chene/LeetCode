@@ -1,8 +1,8 @@
 package com.bee.leetcode.db.bean;
 
-//登录注册
+//登录注册,忘记密码
 
-public class LogAndRegister {
+public class LogAndRegisterOrForgetBean {
     private String token;
     private UserBean user;
 

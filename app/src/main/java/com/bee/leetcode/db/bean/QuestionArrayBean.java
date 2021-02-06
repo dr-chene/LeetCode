@@ -2,7 +2,10 @@ package com.bee.leetcode.db.bean;
 
 //题目列表展示接口中的Array部分
 
-public class QuestionArray {
+import com.google.gson.annotations.SerializedName;
+
+public class QuestionArrayBean {
+
     private long questionid;
     private String title;
     private int answer_num;

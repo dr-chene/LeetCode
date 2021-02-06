@@ -1,8 +1,8 @@
 package com.bee.leetcode.db.bean;
 
-//请求验证码
+//请求验证码,点赞,评论发送,提交题解接口
 
-public class RequestCode {
+public class RequestAndLikeAndSendBean {
         private String code;
         private String message;
         private String number;

@@ -2,6 +2,8 @@ package com.bee.leetcode.db.bean;
 
 //消息通知
 
+import com.google.gson.annotations.SerializedName;
+
 public class NoticeBean {
     private String received_id;
     private String operator_id;
