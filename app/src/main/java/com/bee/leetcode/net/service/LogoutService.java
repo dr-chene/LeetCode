@@ -3,14 +3,14 @@ package com.bee.leetcode.net.service;
 import com.bee.leetcode.net.TempBean;
 
 import io.reactivex.rxjava3.core.Single;
-import retrofit2.http.GET;
+import retrofit2.http.POST;
 
 /**
  * created by dr_chene on 2021/2/6
- * desc 个人已完成题目信息
+ * desc 登出
  */
-public interface SolvedService {
+public interface LogoutService {
 
-    @GET("/user/answer")
-    Single<TempBean> getSolved();
+    @POST("/user/exit")
+    Single<TempBean> logout();
 }

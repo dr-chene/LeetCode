@@ -1,8 +1,13 @@
 package com.bee.leetcode.net;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import okhttp3.Interceptor;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -17,6 +22,7 @@ public class RetrofitFactory {
     }
 
     public static final String baseUrl = "";
+    private static OkHttpClient baseClient = null;
 
     //享元模式
     public static final Map<Integer, Retrofit> retrofitCacheMap = new HashMap<>();
@@ -41,11 +47,47 @@ public class RetrofitFactory {
         if (normal == null) {
             normal = new Retrofit.Builder()
                     .baseUrl(baseUrl)
+                    .client(getBaseClientInstance())
                     .addConverterFactory(GsonConverterFactory.create())//gson适配器
                     .addCallAdapterFactory(RxJava3CallAdapterFactory.create())//rxjava3适配器
                     .build();
             retrofitCacheMap.put(TYPE_NORMAL, normal);
         }
         return normal;
+    }
+
+    private static OkHttpClient getBaseClientInstance(){
+        if (baseClient == null){
+            synchronized (OkHttpClient.class){
+                if (baseClient == null){
+                    baseClient = new OkHttpClient.Builder()
+                            .addInterceptor(new Interceptor() {
+                                @Override
+                                public Response intercept(Chain chain) throws IOException {
+                                    Request original = chain.request();
+                                    Request request = addHeaders(original).build();
+                                    return chain.proceed(request);
+                                }
+                            }).build();
+                }
+            }
+        }
+        return baseClient;
+    }
+
+    //为每次的请求添加header
+    private static Request.Builder addHeaders(Request request){
+        return request.newBuilder()
+                .addHeader("token", token())
+                .addHeader("Content-Type", contentType());
+    }
+
+    private static String token(){
+        // TODO: 2021/2/6 return token ;
+        return "";
+    };
+
+    private static String contentType(){
+        return "application/json;charset=UTF-8";
     }
 }

@@ -7,10 +7,10 @@ import retrofit2.http.GET;
 
 /**
  * created by dr_chene on 2021/2/6
- * desc 个人已完成题目信息
+ * desc 活跃度
  */
-public interface SolvedService {
+public interface ActiveService {
 
-    @GET("/user/answer")
-    Single<TempBean> getSolved();
+    @GET("/user/activity")
+    Single<TempBean> getActivity();
 }

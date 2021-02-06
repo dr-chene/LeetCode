@@ -3,12 +3,13 @@ package com.bee.leetcode.net.service;
 import com.bee.leetcode.net.TempBean;
 
 import io.reactivex.rxjava3.core.Single;
+import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 
 /**
  * created by dr_chene on 2021/2/6
- * desc 题目获取接口
+ * desc 获取题目
  */
 public interface QuestionService {
 
@@ -35,18 +36,18 @@ public interface QuestionService {
     String TAG_OPERATION = "operation";
 
     /**
-     * @param type 请求的问题的类型分组
+     * @param list 请求的问题的类型分组
      * @param pageNum 每页问题的数量
      */
     @GET("/question/all")
     Single<TempBean> getQuestions(
-            @Query("list") String type,
-            @Query("difficulty") String difficulty,
-            @Query("state") String state,
-            @Query("tag") String tag,
-            @Query("page-num") int pageNum,
-            @Query("page") int page,
-            @Query("keyword") String keyword
+            @Body String list,
+            @Body String difficulty,
+            @Body String state,
+            @Body String tag,
+            @Body int pageNum,
+            @Body int page,
+            @Body String keyword
     );
 
     /**
