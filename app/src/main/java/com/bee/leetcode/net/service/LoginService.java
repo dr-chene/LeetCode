@@ -8,7 +8,7 @@ import retrofit2.http.Query;
 
 /**
  * created by dr_chene on 2021/2/5
- * desc
+ * desc 登录接口
  */
 public interface LoginService {
 
