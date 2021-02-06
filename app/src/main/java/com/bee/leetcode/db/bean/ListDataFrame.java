@@ -4,7 +4,7 @@ import java.util.List;
 
 //题目列表展示与题解列表，泛型中传入QuestionAnswerBean或者QuestionArrayBean
 
-public class QuestionArrayAndQuestionAnswerFrame<T> {
+public class ListDataFrame<T> {
 
         private String message;
         private int code;
