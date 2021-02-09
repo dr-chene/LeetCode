@@ -1,5 +1,6 @@
 package com.bee.leetcode;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -9,9 +10,9 @@ import com.bee.leetcode.base.BaseActivity;
 public class MainActivity extends BaseActivity {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        setContentView(initLayout());
     }
 
     @Override
@@ -24,8 +25,5 @@ public class MainActivity extends BaseActivity {
         return 0;
     }
 
-    @Override
-    protected void iniData() {
 
-    }
 }

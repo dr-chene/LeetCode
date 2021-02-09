@@ -15,14 +15,7 @@ public abstract class BaseFragment extends Fragment {
     protected final String TAG = this.getClass().getSimpleName();
     public Context context;
 
-    @Nullable
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View rootView = inflater.inflate(initLayout(), container, false);
-        initView(rootView);
-        initData(context);
-        return rootView;
-    }
+
 
     //初始化布局 返回布局xml视图的资源id
     protected abstract int initLayout();
@@ -30,6 +23,5 @@ public abstract class BaseFragment extends Fragment {
     //初始化控件
     protected abstract void initView(final View view);
 
-    //设置数据
-    protected abstract void initData(Context mContext);
+
 }
