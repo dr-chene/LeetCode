@@ -8,20 +8,27 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.databinding.DataBindingUtil;
+import androidx.databinding.ViewDataBinding;
 import androidx.fragment.app.Fragment;
 
-public abstract class BaseFragment extends Fragment {
+public abstract class BaseFragment<T extends ViewDataBinding> extends Fragment implements IViewInit {
+    protected T binding;
     //获取TAG的fragment名称
     protected final String TAG = this.getClass().getSimpleName();
-    public Context context;
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        binding = DataBindingUtil.inflate(inflater, getContentViewResId(),container, false);
+        initView(binding);
+        initAction(binding);
+        subscribe(binding);
+        return binding.getRoot();
+
+    }
 
 
-
-    //初始化布局 返回布局xml视图的资源id
-    protected abstract int initLayout();
-
-    //初始化控件
-    protected abstract void initView(final View view);
 
 
 }

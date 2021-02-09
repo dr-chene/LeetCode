@@ -2,28 +2,29 @@ package com.bee.leetcode;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.ViewDataBinding;
 
 import android.os.Bundle;
+import android.widget.LinearLayout;
 
 import com.bee.leetcode.base.BaseActivity;
+import com.bee.leetcode.databinding.ActivityMainBinding;
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseActivity<ActivityMainBinding> {
+
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(initLayout());
+    public void initView(ActivityMainBinding binding) {
+        LinearLayout mainLayout = binding.mainLayout;
     }
 
     @Override
-    protected int initLayout() {
+    public void initAction(ActivityMainBinding binding) {
+
+    }
+
+    @Override
+    public int getContentViewResId() {
         return R.layout.activity_main;
     }
-
-    @Override
-    protected int initView() {
-        return 0;
-    }
-
-
 }
