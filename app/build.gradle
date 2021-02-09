@@ -7,7 +7,7 @@ android {
     buildToolsVersion "30.0.3"
 
     //开启DataBinding
-    buildFeatures{
+    buildFeatures {
         dataBinding true
     }
 
@@ -25,12 +25,22 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            //添加LOG_DEBUG常量用来判断当前为debug模式还是release模式
+            buildConfigField("boolean", "LOG_DEBUG", "false")
+        }
+
+        //添加LOG_DEBUG常量用来判断当前为debug模式还是release模式
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField("boolean", "LOG_DEBUG", "true")
         }
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
 }
 
 dependencies {
