@@ -19,9 +19,9 @@ public abstract class BaseActivity <T extends ViewDataBinding>extends AppCompatA
         super.onCreate(savedInstanceState, persistentState);
         binding = DataBindingUtil.setContentView(this, getContentViewResId());
 
-        initView(binding);
-        initAction(binding);
-        subscribe(binding);
+        initView();
+        initAction();
+        subscribe();
 
     }
 

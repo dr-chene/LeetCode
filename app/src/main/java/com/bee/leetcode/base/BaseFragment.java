@@ -21,9 +21,9 @@ public abstract class BaseFragment<T extends ViewDataBinding> extends Fragment i
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, getContentViewResId(),container, false);
-        initView(binding);
-        initAction(binding);
-        subscribe(binding);
+        initView();
+        initAction();
+        subscribe();
         return binding.getRoot();
 
     }
