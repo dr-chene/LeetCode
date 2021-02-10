@@ -14,7 +14,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
 
 
     @Override
-    public void initView(ActivityMainBinding binding) {
+    public void initView() {
         LinearLayout mainLayout = binding.mainLayout;
     }
 
