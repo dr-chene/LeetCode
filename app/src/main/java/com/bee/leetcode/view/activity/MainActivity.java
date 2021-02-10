@@ -1,4 +1,4 @@
-package com.bee.leetcode;
+package com.bee.leetcode.view.activity;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;

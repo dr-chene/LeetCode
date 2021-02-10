@@ -6,8 +6,9 @@ android {
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
 
-    dataBinding {
-        enabled = true
+    //开启DataBinding
+    buildFeatures{
+        dataBinding true
     }
 
     defaultConfig {
@@ -40,4 +41,17 @@ dependencies {
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+    //room
+    implementation "androidx.room:room-runtime:$room_version"
+    annotationProcessor "androidx.room:room-compiler:$room_version"
+    implementation "androidx.room:room-rxjava2:$room_version"
+
+    //rxjava3
+    implementation "io.reactivex.rxjava3:rxjava:$rxjava_version"
+
+    //retrofit
+    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
+    implementation "com.squareup.retrofit2:adapter-rxjava3:$retrofit_version"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
 }
