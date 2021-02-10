@@ -2,7 +2,7 @@ package com.bee.leetcode.base;
 
 import androidx.databinding.ViewDataBinding;
 
-public interface IViewInit <T extends ViewDataBinding> {
+public interface IViewInit {
     //初始化视图，做一些设置，例如设置toolbar等
     void initView();
     //初始化事件，主要做事件的监听的初始化

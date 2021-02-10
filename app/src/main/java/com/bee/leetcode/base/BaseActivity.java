@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
 
-public abstract class BaseActivity <T extends ViewDataBinding>extends AppCompatActivity implements IViewInit<T>{
+public abstract class BaseActivity <T extends ViewDataBinding>extends AppCompatActivity implements IViewInit{
     protected T binding;
     
 
