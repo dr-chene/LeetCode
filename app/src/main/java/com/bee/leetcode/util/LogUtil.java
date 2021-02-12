@@ -33,7 +33,7 @@ public class LogUtil {
         }
     }
 
-    //输入tag,msg,level三个参数
+    //输入tag,msg,level三个参数,若传入的level不合法，则默认为debug
     public static void log(String tag, String msg, int type) {
         switch (type) {
             case VERBOSE:
@@ -59,6 +59,11 @@ public class LogUtil {
             case ERROR:
                 if (IS_DEBUG && LEVEL <= ERROR) {
                     Log.e(tag, msg);
+                }
+                break;
+            default:
+                if (IS_DEBUG && LEVEL <= ERROR) {
+                    Log.d(tag, msg);
                 }
                 break;
         }
