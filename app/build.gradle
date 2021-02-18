@@ -10,7 +10,9 @@ android {
     buildFeatures{
         dataBinding true
     }
+    task prepareKotlinBuildScriptModel {
 
+    }
     defaultConfig {
         applicationId "com.bee.leetcode"
         minSdkVersion 16
