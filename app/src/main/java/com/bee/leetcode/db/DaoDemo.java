@@ -4,6 +4,8 @@ import androidx.room.Dao;
 
 import com.bee.leetcode.net.BeanDemo;
 
+import java.util.List;
+
 import io.reactivex.Completable;
 import io.reactivex.Flowable;
 
@@ -13,6 +15,8 @@ import io.reactivex.Flowable;
  */
 @Dao
 public interface DaoDemo {
-    Flowable<BeanDemo> get();
+
+    Flowable<List<BeanDemo>> get();
+
     Completable save(BeanDemo t);
 }

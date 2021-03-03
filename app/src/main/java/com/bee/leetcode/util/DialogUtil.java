@@ -1,10 +1,9 @@
-package com.bee.leetcode;
+package com.bee.leetcode.util;
 
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
-import android.bluetooth.le.ScanSettings;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
@@ -14,7 +13,6 @@ import android.view.View;
 import androidx.annotation.RequiresApi;
 
 public class DialogUtil {
-
 
     private DialogUtil() {
     }
@@ -112,7 +110,7 @@ public class DialogUtil {
 
     static class Builder {
 
-        private AlertDialog.Builder builder;
+        private final AlertDialog.Builder builder;
         private DialogInterface.OnClickListener positiveListner;
         private DialogInterface.OnClickListener negativeListner;
         private String positiveText = "确定";
@@ -182,10 +180,10 @@ public class DialogUtil {
             return this;
         }
 
-        public Dialog builde() {
+        public Dialog build() {
             return builder.setPositiveButton(positiveText, positiveListner)
-                          .setNegativeButton(negativeText, negativeListner)
-                          .create();
+                    .setNegativeButton(negativeText, negativeListner)
+                    .create();
         }
     }
 }

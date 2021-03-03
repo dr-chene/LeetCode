@@ -18,7 +18,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 public class RetrofitFactory {
     //防止创建类对象
-    private RetrofitFactory() { }
+    private RetrofitFactory() {
+    }
 
     public static final String baseUrl = "http://81.71.89.149:9001/";
     private static OkHttpClient baseClient = null;
@@ -55,10 +56,10 @@ public class RetrofitFactory {
         return normal;
     }
 
-    private static OkHttpClient getBaseClientInstance(){
-        if (baseClient == null){
-            synchronized (OkHttpClient.class){
-                if (baseClient == null){
+    private static OkHttpClient getBaseClientInstance() {
+        if (baseClient == null) {
+            synchronized (OkHttpClient.class) {
+                if (baseClient == null) {
                     baseClient = new OkHttpClient.Builder()
                             .addInterceptor(new Interceptor() {
                                 @Override
@@ -75,18 +76,18 @@ public class RetrofitFactory {
     }
 
     //为每次的请求添加header
-    private static Request.Builder addHeaders(Request request){
+    private static Request.Builder addHeaders(Request request) {
         return request.newBuilder()
                 .addHeader("token", token())
                 .addHeader("Content-Type", contentType());
     }
 
-    private static String token(){
+    private static String token() {
         // TODO: 2021/2/6 return token ;
         return "";
-    };
+    }
 
-    private static String contentType(){
+    private static String contentType() {
         return "application/json;charset=UTF-8";
     }
 }

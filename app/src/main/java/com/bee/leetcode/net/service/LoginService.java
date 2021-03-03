@@ -1,6 +1,6 @@
 package com.bee.leetcode.net.service;
 
-import com.bee.leetcode.db.bean.User;
+import com.bee.leetcode.net.BeanDemo;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -8,11 +8,8 @@ import org.json.JSONObject;
 import io.reactivex.rxjava3.core.Single;
 import okhttp3.RequestBody;
 import retrofit2.http.Body;
-import retrofit2.http.Multipart;
 import retrofit2.http.POST;
-import retrofit2.http.Part;
 
-import static com.bee.leetcode.util.MapUtil.str2Form;
 import static com.bee.leetcode.util.MapUtil.str2Json;
 
 /**
@@ -22,14 +19,14 @@ import static com.bee.leetcode.util.MapUtil.str2Json;
 public interface LoginService {
 
     @POST("/user/login")
-    Single<User> login(
+    Single<BeanDemo> login(
             @Body RequestBody json
     );
 
     /**
      * 参数与{@link RegisterService}含义一致
      */
-    default Single<User> login(String registerBody, String password, String method){
+    default Single<BeanDemo> login(String registerBody, String password, String method){
         JSONObject json = new JSONObject();
         try {
             json.put("registerBody", registerBody);

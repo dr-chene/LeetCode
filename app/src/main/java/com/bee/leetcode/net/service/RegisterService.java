@@ -1,8 +1,7 @@
 package com.bee.leetcode.net.service;
 
-import com.bee.leetcode.db.bean.User;
+import com.bee.leetcode.net.BeanDemo;
 import com.bee.leetcode.net.ServiceConstants;
-import com.google.gson.JsonObject;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -10,11 +9,8 @@ import org.json.JSONObject;
 import io.reactivex.rxjava3.core.Single;
 import okhttp3.RequestBody;
 import retrofit2.http.Body;
-import retrofit2.http.Multipart;
 import retrofit2.http.POST;
-import retrofit2.http.Part;
 
-import static com.bee.leetcode.util.MapUtil.str2Form;
 import static com.bee.leetcode.util.MapUtil.str2Json;
 
 /**
@@ -24,7 +20,7 @@ import static com.bee.leetcode.util.MapUtil.str2Json;
 public interface RegisterService {
 
     @POST("/user/register")
-    Single<User> register(
+    Single<BeanDemo> register(
             @Body RequestBody json
     );
 
@@ -34,7 +30,7 @@ public interface RegisterService {
      * @param registerBody method对应的phone或email账号
      *
      */
-    default Single<User> register(String registerBody, String password, int authCode, String method){
+    default Single<BeanDemo> register(String registerBody, String password, int authCode, String method){
         JSONObject json = new JSONObject();
         try {
             json.put("registerBody", registerBody);

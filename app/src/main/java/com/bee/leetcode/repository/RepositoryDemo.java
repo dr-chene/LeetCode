@@ -2,34 +2,67 @@ package com.bee.leetcode.repository;
 
 import com.bee.leetcode.db.DaoDemo;
 import com.bee.leetcode.net.BeanDemo;
-import com.bee.leetcode.net.service.ActiveService;
+import com.bee.leetcode.net.service.ServiceDemo;
+
+import java.util.List;
 
 import io.reactivex.Completable;
 import io.reactivex.Flowable;
-import io.reactivex.rxjava3.observers.DisposableSingleObserver;
+import io.reactivex.rxjava3.core.Single;
 
 /**
  * created by dr_chene on 2021/2/19
- * desc
+ * desc 网络框架示例repository部分
  */
-public class RepositoryDemo {
-    private ActiveService api;
-    private DaoDemo local;
+public class RepositoryDemo extends NetworkBoundResource<BeanDemo, BeanDemo> {
+    private final ServiceDemo api;
+    private final DaoDemo local;
 
-    public RepositoryDemo(ActiveService api, DaoDemo local) {
+    public RepositoryDemo(ServiceDemo api, DaoDemo local) {
         this.api = api;
         this.local = local;
     }
 
-    public void refresh(DisposableSingleObserver<BeanDemo> observer){
-        api.getActivity().safeSubscribe(observer);
+    public boolean refresh(RequestSuccess<BeanDemo> success) {
+        return request(success);
     }
 
-    public Flowable<BeanDemo> get(){
+    public boolean load(RequestSuccess<BeanDemo> success) {
+        return request(success);
+    }
+
+    @Override
+    protected Completable saveCallResult(BeanDemo item) {
+        return local.save(item);
+    }
+
+    @Override
+    protected boolean shouldFetch(BeanDemo data) {
+        return false;
+    }
+
+    @Override
+    protected Flowable<List<BeanDemo>> loadFromDb() {
         return local.get();
     }
 
-    public Completable save(BeanDemo t){
-        return local.save(t);
+    @Override
+    protected Single<ApiResponse<BeanDemo>> createCall() {
+        return api.getRemoteData();
+    }
+
+    @Override
+    protected boolean isApiRequestSuccess(ApiResponse<BeanDemo> beanDemoApiResponse) {
+        return beanDemoApiResponse.errorCode == 200;
+    }
+
+    @Override
+    protected BeanDemo remoteToLocal(BeanDemo beanDemo) {
+        return beanDemo;
+    }
+
+    @Override
+    public void apiResultError(int error, String message) {
+
     }
 }
