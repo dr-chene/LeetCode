@@ -1,6 +1,6 @@
 package com.bee.leetcode.net.service;
 
-import com.bee.leetcode.net.TempBean;
+import com.bee.leetcode.net.BeanDemo;
 
 import io.reactivex.rxjava3.core.Single;
 import retrofit2.http.Body;
@@ -12,14 +12,14 @@ import retrofit2.http.POST;
  */
 public interface RunService {
 
-    /**
-     *
-     * @param testCase 测试用例
-     */
-    @POST("/question/run")
-    Single<TempBean> run(
-           @Body String questionId,
-           @Body String code,
-           @Body String testCase
-    );
+//    /**
+//     *
+//     * @param testCase 测试用例
+//     */
+//    @POST("/question/run")
+//    Single<BeanDemo> run(
+//           @Body String questionId,
+//           @Body String code,
+//           @Body String testCase
+//    );
 }

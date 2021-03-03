@@ -1,6 +1,6 @@
 package com.bee.leetcode.net.service;
 
-import com.bee.leetcode.net.TempBean;
+import com.bee.leetcode.net.BeanDemo;
 
 import io.reactivex.rxjava3.core.Flowable;
 import retrofit2.http.GET;
@@ -11,6 +11,6 @@ import retrofit2.http.GET;
  */
 public interface NoticeService {
 
-    @GET("/notice")
-    Flowable<TempBean> notice();
+//    @GET("/notice")
+//    Flowable<BeanDemo> notice();
 }

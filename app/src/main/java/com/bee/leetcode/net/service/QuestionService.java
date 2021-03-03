@@ -1,11 +1,15 @@
 package com.bee.leetcode.net.service;
 
-import com.bee.leetcode.net.TempBean;
+import com.bee.leetcode.net.BeanDemo;
 
 import io.reactivex.rxjava3.core.Single;
-import retrofit2.http.Body;
+import okhttp3.RequestBody;
 import retrofit2.http.GET;
+import retrofit2.http.Multipart;
+import retrofit2.http.Part;
 import retrofit2.http.Query;
+
+import static com.bee.leetcode.util.MapUtil.str2Form;
 
 /**
  * created by dr_chene on 2021/2/6
@@ -35,27 +39,31 @@ public interface QuestionService {
     String TAG_TREE = "tree";
     String TAG_OPERATION = "operation";
 
-    /**
-     * @param list 请求的问题的类型分组
-     * @param pageNum 每页问题的数量
-     */
+    @Multipart
     @GET("/question/all")
-    Single<TempBean> getQuestions(
-            @Body String list,
-            @Body String difficulty,
-            @Body String state,
-            @Body String tag,
-            @Body int pageNum,
-            @Body int page,
-            @Body String keyword
+    Single<BeanDemo> getQuestions(
+            @Part("list") RequestBody list,
+            @Part("difficulty") RequestBody difficulty,
+            @Part("state") RequestBody state,
+            @Part("tag") RequestBody tag,
+            @Part("page-num") RequestBody pageNum,
+            @Part("page") RequestBody page,
+            @Part("keyword") RequestBody keyword
     );
 
     /**
-     *
+     * @param list    请求的问题的类型分组
+     * @param pageNum 每页问题的数量
+     */
+    default Single<BeanDemo> getQuestions(String list, String difficulty, String state, String tag, int pageNum, int page, String keyword) {
+        return getQuestions(str2Form(list), str2Form(difficulty), str2Form(state), str2Form(tag), str2Form(pageNum + ""), str2Form(page + ""), str2Form(keyword));
+    }
+
+    /**
      * @return 返回题目详情
      */
     @GET("/question/start")
-    Single<TempBean> startQuestion(
+    Single<BeanDemo> startQuestion(
             @Query("questionId") String questionId
     );
 }

@@ -1,6 +1,6 @@
 package com.bee.leetcode.net.service;
 
-import com.bee.leetcode.net.TempBean;
+import com.bee.leetcode.net.BeanDemo;
 
 import io.reactivex.rxjava3.core.Single;
 import retrofit2.http.GET;
@@ -12,5 +12,5 @@ import retrofit2.http.GET;
 public interface ActiveService {
 
     @GET("/user/activity")
-    Single<TempBean> getActivity();
+    Single<BeanDemo> getActivity();
 }

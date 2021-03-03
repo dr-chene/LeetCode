@@ -1,7 +1,6 @@
 package com.bee.leetcode.util;
 
 import org.reactivestreams.Publisher;
-import org.reactivestreams.Subscription;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.annotations.NonNull;

@@ -1,6 +1,8 @@
 package com.bee.leetcode.net.service;
 
 import com.bee.leetcode.db.bean.User;
+import com.bee.leetcode.net.ServiceConstants;
+import com.google.gson.JsonObject;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -16,28 +18,32 @@ import static com.bee.leetcode.util.MapUtil.str2Form;
 import static com.bee.leetcode.util.MapUtil.str2Json;
 
 /**
- * created by dr_chene on 2021/2/5
- * desc 登录
+ * created by dr_chene on 2021/3/3
+ * desc
  */
-public interface LoginService {
+public interface RegisterService {
 
-    @POST("/user/login")
-    Single<User> login(
+    @POST("/user/register")
+    Single<User> register(
             @Body RequestBody json
     );
 
     /**
-     * 参数与{@link RegisterService}含义一致
+     *
+     * @param method {@link ServiceConstants}中method常量
+     * @param registerBody method对应的phone或email账号
+     *
      */
-    default Single<User> login(String registerBody, String password, String method){
+    default Single<User> register(String registerBody, String password, int authCode, String method){
         JSONObject json = new JSONObject();
         try {
             json.put("registerBody", registerBody);
             json.put("password", password);
+            json.put("authCode", authCode);
             json.put("method", method);
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        return login(str2Json(json.toString()));
+        return register(str2Json(json.toString()));
     }
 }

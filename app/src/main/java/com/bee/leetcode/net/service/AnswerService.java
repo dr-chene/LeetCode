@@ -1,6 +1,6 @@
 package com.bee.leetcode.net.service;
 
-import com.bee.leetcode.net.TempBean;
+import com.bee.leetcode.net.BeanDemo;
 
 import io.reactivex.rxjava3.core.Single;
 import retrofit2.http.Body;
@@ -15,17 +15,17 @@ import retrofit2.http.Query;
 public interface AnswerService {
 
     @GET("/answer/answerId")
-    Single<TempBean> getAnswerDetail(
+    Single<BeanDemo> getAnswerDetail(
             @Query("answerId") String answerId
     );
 
     @GET("/answerList/questionId")
-    Single<TempBean> getQuestionAnswers(
+    Single<BeanDemo> getQuestionAnswers(
             @Query("questionId") String questionId
     );
 
     @POST("/answer")
-    Single<TempBean> sendAnswer(
+    Single<BeanDemo> sendAnswer(
             @Body String userId,
             @Body String questionId,
             @Body String title,

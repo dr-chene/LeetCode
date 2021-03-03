@@ -18,13 +18,12 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 public class RetrofitFactory {
     //防止创建类对象
-    private RetrofitFactory() {
-    }
+    private RetrofitFactory() { }
 
-    public static final String baseUrl = "";
+    public static final String baseUrl = "http://81.71.89.149:9001/";
     private static OkHttpClient baseClient = null;
 
-    //享元模式
+    //存储retrofit对象
     public static final Map<Integer, Retrofit> retrofitCacheMap = new HashMap<>();
     public static final int TYPE_NORMAL = 0;
 
