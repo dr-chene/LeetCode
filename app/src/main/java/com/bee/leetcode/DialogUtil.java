@@ -39,7 +39,7 @@ public class DialogUtil {
     }
 
     /**
-     * 该方法会自动添加一个确定的按钮 点击确定后对话框消失
+     * 自动添加一个确定的按钮 点击确定后对话框消失
      *
      * @param context 上下文
      * @param title   dialog的标题
