@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
-//上拉加载，下拉刷新进行封装
+//上拉进行加载，下拉刷新进行封装
 public abstract class BaseBindingAdapter<T,VH extends RecyclerView.ViewHolder> extends RecyclerView.Adapter<VH> {
     public List<T> mDataList;
     public Context mContext;

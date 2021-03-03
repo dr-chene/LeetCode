@@ -6,7 +6,7 @@ import android.view.ViewGroup;
 
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
-
+//使用BaseBindingAdapter的举列子
 public class MainActivityAdapter extends BaseBindingAdapter<ShowDataBeans,BaseBindingAdapter.ViewHolder>{
     public MainActivityAdapter(Context context){
         super(context);
