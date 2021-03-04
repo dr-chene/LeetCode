@@ -1,4 +1,4 @@
-package com.bee.leetcode;
+package com.bee.leetcode.base;
 
 import android.content.Context;
 import android.view.ViewGroup;
@@ -14,7 +14,7 @@ public abstract class BaseBindingAdapter<T,VH extends RecyclerView.ViewHolder> e
     public List<T> mDataList;
     public Context mContext;
 
-    static class ViewHolder extends RecyclerView.ViewHolder{
+    public static class ViewHolder extends RecyclerView.ViewHolder{
         ViewDataBinding mDataBinding;
 
         public ViewHolder(ViewDataBinding binding){
