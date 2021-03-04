@@ -3,6 +3,7 @@ package com.bee.leetcode.repository;
 import android.util.Log;
 
 import androidx.annotation.MainThread;
+import androidx.annotation.NonNull;
 import androidx.annotation.WorkerThread;
 
 import java.util.List;
@@ -28,7 +29,7 @@ public abstract class NetworkBoundResource<Remote, Local> {
     private Disposable localRequest;
     private Disposable insert;
 
-    //保存远程获取的数据到本地
+    //保存远程获取的数据到本地，无则返回null
     @WorkerThread
     protected abstract Completable saveCallResult(Local item);
 
@@ -36,13 +37,13 @@ public abstract class NetworkBoundResource<Remote, Local> {
     @MainThread
     protected abstract boolean shouldFetch(Local data);
 
-    //从本地获取数据
+    //从本地获取数据，无则返回null
     @MainThread
     protected abstract Flowable<List<Local>> loadFromDb();
 
     //发起请求，获取远程数据
     @MainThread
-    protected abstract io.reactivex.rxjava3.core.Single<ApiResponse<Remote>> createCall();
+    protected abstract @NonNull io.reactivex.rxjava3.core.Single<ApiResponse<Remote>> createCall();
 
     //rxjava使用过程中发生的错误、异常
     protected void onFetchFailed(Throwable t) {
@@ -90,45 +91,57 @@ public abstract class NetworkBoundResource<Remote, Local> {
     public final boolean request(RequestSuccess<Local> success) {
         if (!isMore()) return false;
 //        Log.d(TAG, "request: more");
-        localRequest = loadFromDb().subscribeOn(Schedulers.io())
+        Flowable<List<Local>> local = loadFromDb();
+        if (local == null) netRequest(success);
+        else localRequest = local.subscribeOn(Schedulers.io())
                 .observeOn(Schedulers.io())
                 .subscribe(locals -> {
 //                    Log.d(TAG, "request: local");
                     if (locals.isEmpty() || shouldFetch(locals.get(0))) {
 //                        Log.d(TAG, "request: remote");
-                        apiRequest = createCall().subscribeOn(io.reactivex.rxjava3.schedulers.Schedulers.io())
-                                .observeOn(io.reactivex.rxjava3.schedulers.Schedulers.io())
-                                .subscribe(remoteApiResponse -> {
-                                    if (isApiRequestSuccess(remoteApiResponse)) {
-                                        apiRequestSuccess(remoteApiResponse.data);
-                                        insert = saveCallResult(remoteToLocal(remoteApiResponse.data)).subscribeOn(Schedulers.io())
-                                                .subscribe(() -> {
-                                                    insertSuccess();
-//                                                    Log.d(TAG, "request: insert success");
-                                                    unSubscribe(insert);
-                                                }, this::onFetchFailed);
-                                    } else {
-                                        apiResultError(remoteApiResponse.errorCode, remoteApiResponse.errorMsg);
-                                    }
-                                    if (apiRequest != null) {
-                                        apiRequest.dispose();
-                                        apiRequest = null;
-                                    }
-                                }, this::onFetchFailed);
+                        netRequest(success);
                     } else {
 //                        Log.d(TAG, "request: local success");
                         localRequestSuccess(locals.get(0));
                         success.dispatchValue(locals.get(0));
                         unSubscribe(localRequest);
+                        localRequest = null;
                     }
                 }, this::onFetchFailed);
         return true;
     }
 
+    private void netRequest(RequestSuccess<Local> success) {
+        apiRequest = createCall().subscribeOn(io.reactivex.rxjava3.schedulers.Schedulers.io())
+                .observeOn(io.reactivex.rxjava3.schedulers.Schedulers.io())
+                .subscribe(remoteApiResponse -> {
+                    if (isApiRequestSuccess(remoteApiResponse)) {
+                        apiRequestSuccess(remoteApiResponse.data);
+                        Completable save = saveCallResult(remoteToLocal(remoteApiResponse.data));
+                        if (save != null)
+                            insert = save.subscribeOn(Schedulers.io())
+                                    .subscribe(() -> {
+                                        insertSuccess();
+//                                        Log.d(TAG, "request: insert success");
+                                        unSubscribe(insert);
+                                        insert = null;
+                                    }, this::onFetchFailed);
+                        else success.dispatchValue(remoteToLocal(remoteApiResponse.data));
+                    } else {
+                        apiResultError(remoteApiResponse.code, remoteApiResponse.message);
+                    }
+                    if (apiRequest != null) {
+                        apiRequest.dispose();
+                        apiRequest = null;
+                    }
+                }, this::onFetchFailed);
+    }
+
+    //返回的网络数据格式
     public static class ApiResponse<T> {
         public T data;
-        public int errorCode;
-        public String errorMsg;
+        public int code;
+        public String message;
     }
 
     public interface RequestSuccess<Local> {

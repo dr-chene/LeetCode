@@ -1,5 +1,7 @@
 package com.bee.leetcode.repository;
 
+import androidx.annotation.NonNull;
+
 import com.bee.leetcode.db.DaoDemo;
 import com.bee.leetcode.net.BeanDemo;
 import com.bee.leetcode.net.service.ServiceDemo;
@@ -46,6 +48,7 @@ public class RepositoryDemo extends NetworkBoundResource<BeanDemo, BeanDemo> {
         return local.get();
     }
 
+    @NonNull
     @Override
     protected Single<ApiResponse<BeanDemo>> createCall() {
         return api.getRemoteData();
@@ -53,7 +56,7 @@ public class RepositoryDemo extends NetworkBoundResource<BeanDemo, BeanDemo> {
 
     @Override
     protected boolean isApiRequestSuccess(ApiResponse<BeanDemo> beanDemoApiResponse) {
-        return beanDemoApiResponse.errorCode == 200;
+        return beanDemoApiResponse.code == 200;
     }
 
     @Override
