@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">LeetCode</string>
+    <string name="main_bottom_nav_questions">题库</string>
+    <string name="main_bottom_nav_profile">我的</string>
 </resources>
