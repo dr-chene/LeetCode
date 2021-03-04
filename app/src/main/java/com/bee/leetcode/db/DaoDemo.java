@@ -8,6 +8,8 @@ import java.util.List;
 
 import io.reactivex.Completable;
 import io.reactivex.Flowable;
+import io.reactivex.Maybe;
+import io.reactivex.Single;
 
 /**
  * created by dr_chene on 2021/2/19
@@ -16,7 +18,7 @@ import io.reactivex.Flowable;
 @Dao
 public interface DaoDemo {
 
-    Flowable<List<BeanDemo>> get();
+    Maybe<List<BeanDemo>> get();
 
     Completable save(BeanDemo t);
 }

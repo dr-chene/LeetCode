@@ -4,6 +4,7 @@ import com.bee.leetcode.net.BeanDemo;
 
 import io.reactivex.rxjava3.core.Single;
 import okhttp3.RequestBody;
+import retrofit2.http.Body;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
@@ -16,21 +17,8 @@ import static com.bee.leetcode.util.MapUtil.str2Form;
  */
 public interface ForgetService {
 
-    @Multipart
     @POST("/user/forget")
     Single<BeanDemo> forget(
-            @Part("method") RequestBody method,
-            @Part("forGetBody") RequestBody forGetBody,
-            @Part("code") RequestBody code,
-            @Part("newpassword") RequestBody newPassword
+            @Body RequestBody json
     );
-
-    /**
-     *
-     * @param method,forGetBody  与{@link RegisterService}一致
-     * @param code 发送的验证码
-     */
-    default Single<BeanDemo> forget(String method, String forGetBody, String code, String newPassword){
-        return forget(str2Form(method), str2Form(forGetBody), str2Form(code), str2Form(newPassword));
-    }
 }

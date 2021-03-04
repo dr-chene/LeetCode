@@ -9,8 +9,7 @@ import com.bee.leetcode.net.service.ServiceDemo;
 import java.util.List;
 
 import io.reactivex.Completable;
-import io.reactivex.Flowable;
-import io.reactivex.rxjava3.core.Single;
+import io.reactivex.Maybe;
 
 /**
  * created by dr_chene on 2021/2/19
@@ -44,13 +43,13 @@ public class RepositoryDemo extends NetworkBoundResource<BeanDemo, BeanDemo> {
     }
 
     @Override
-    protected Flowable<List<BeanDemo>> loadFromDb() {
+    protected Maybe<List<BeanDemo>> loadFromDb() {
         return local.get();
     }
 
     @NonNull
     @Override
-    protected Single<ApiResponse<BeanDemo>> createCall() {
+    protected io.reactivex.rxjava3.core.Single<ApiResponse<BeanDemo>> createCall() {
         return api.getRemoteData();
     }
 
