@@ -1,5 +1,9 @@
 <resources>
     <string name="app_name">LeetCode</string>
-    <string name="main_bottom_nav_questions">题库</string>
-    <string name="main_bottom_nav_profile">我的</string>
+    <string name="activity_main_bottom_nav_questions">题库</string>
+    <string name="activity_main_bottom_nav_profile">我的</string>
+    <string name="fragment_comment_edit_text_send">发送</string>
+    <string name="fragment_comment_edit_text_title">编辑评论</string>
+    <string name="activity_comment_toolbar_sort">排序</string>
+    <string name="activity_comment_edittext_hint">写评论</string>
 </resources>

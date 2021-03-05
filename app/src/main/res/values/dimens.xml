@@ -1,4 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="main_bottom_icon_size">20dp</dimen>
+    <dimen name="activity_main_bottom_icon_size">20dp</dimen>
+
+    <dimen name="fragment_comment_edit_title_margin">20dp</dimen>
+    <dimen name="div_line_height">0.3dp</dimen>
+    <dimen name="div_line_height_b">10dp</dimen>
+
+    <dimen name="activity_comment_title_text_size">20sp</dimen>
+    <dimen name="activity_comment_icon_size">25dp</dimen>
+    <dimen name="activity_comment_icon_margin_size">20dp</dimen>
+    <dimen name="activity_comment_edittext_background_corner_size">20dp</dimen>
+    <dimen name="activity_comment_edittext_margin_v">10dp</dimen>
+    <dimen name="activity_comment_edittext_text_margin_start">25dp</dimen>
+
+    <dimen name="recycle_item_comment_avatar_size">35dp</dimen>
+    <dimen name="recycle_item_comment_nickname_margin">8dp</dimen>
+    <dimen name="recycle_item_comment_nickname_size">12sp</dimen>
+    <dimen name="recycle_item_comment_comment_time_size">10sp</dimen>
+    <dimen name="recycle_item_comment_thumb_size">15dp</dimen>
+    <dimen name="recycle_item_comment_thumb_margin_end">20dp</dimen>
+    <dimen name="recycle_item_comment_thumb_up_margin_end">4dp</dimen>
+    <dimen name="recycle_item_comment_content_margin_top">10dp</dimen>
+
+    <dimen name="include_comment_comment_layout_padding">10dp</dimen>
+    <dimen name="include_comment_comment_text_margin">7dp</dimen>
+    <dimen name="include_comment_text_size">11sp</dimen>
+    <dimen name="include_comment_icon_more_width_size">20dp</dimen>
+    <dimen name="include_comment_icon_more_margin">2dp</dimen>
+    <dimen name="include_comment_background_corner_size">10dp</dimen>
+    <dimen name="activity_comment_edittext_margin_h">15dp</dimen>
+
 </resources>
