@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/include_comment_comment_background"
+        android:padding="@dimen/include_comment_comment_layout_padding">
+
+        <TextView
+            android:id="@+id/include_comment_1st"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="\@chene: 测试回复1"
+            android:textColor="@color/black"
+            android:textSize="@dimen/include_comment_text_size"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/include_comment_2nd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/include_comment_comment_text_margin"
+            android:text="\@chensdfvbe: 测试回复2，测试回复测试回复测试回复测试vsdfvwserg回复测试回复测试"
+            android:textColor="@color/black"
+            android:textSize="@dimen/include_comment_text_size"
+            app:layout_constraintTop_toBottomOf="@id/include_comment_1st" />
+
+        <TextView
+            android:id="@+id/include_comment_more"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/include_comment_comment_text_margin"
+            android:text="全部71条回复"
+            android:textColor="@color/green_dark"
+            android:textSize="@dimen/include_comment_text_size"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/include_comment_2nd" />
+
+        <ImageView
+            android:layout_width="@dimen/include_comment_icon_more_width_size"
+            android:layout_height="0dp"
+            android:layout_margin="@dimen/include_comment_icon_more_margin"
+            android:src="@drawable/ic_right_green"
+            app:layout_constraintBottom_toBottomOf="@id/include_comment_more"
+            app:layout_constraintStart_toEndOf="@id/include_comment_more"
+            app:layout_constraintTop_toTopOf="@id/include_comment_more" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
