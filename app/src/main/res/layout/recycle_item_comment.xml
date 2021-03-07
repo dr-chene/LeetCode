@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/recycle_item_iv_avatar"
+            android:layout_width="@dimen/recycle_item_comment_avatar_size"
+            android:layout_height="@dimen/recycle_item_comment_avatar_size"
+            android:layout_margin="@dimen/activity_comment_icon_margin_size"
+            android:src="@drawable/test_avatar"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearanceOverlay="@style/AvatarStyle" />
+
+        <TextView
+            android:id="@+id/recycle_item_tv_nickname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/recycle_item_comment_nickname_margin"
+            android:text="chene"
+            android:textColor="@color/black"
+            android:textSize="@dimen/recycle_item_comment_nickname_size"
+            app:layout_constraintBottom_toTopOf="@id/recycle_item_tv_comment_time"
+            app:layout_constraintStart_toEndOf="@id/recycle_item_iv_avatar"
+            app:layout_constraintTop_toTopOf="@id/recycle_item_iv_avatar"
+            app:layout_constraintVertical_chainStyle="spread" />
+
+        <TextView
+            android:id="@+id/recycle_item_tv_comment_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="5月前"
+            android:textSize="@dimen/recycle_item_comment_comment_time_size"
+            app:layout_constraintBottom_toBottomOf="@id/recycle_item_iv_avatar"
+            app:layout_constraintStart_toStartOf="@id/recycle_item_tv_nickname"
+            app:layout_constraintTop_toBottomOf="@id/recycle_item_tv_nickname" />
+
+        <ImageView
+            android:id="@+id/recycle_item_iv_thumb_down"
+            android:layout_width="@dimen/recycle_item_comment_thumb_size"
+            android:layout_height="@dimen/recycle_item_comment_thumb_size"
+            android:layout_marginEnd="@dimen/recycle_item_comment_thumb_margin_end"
+            android:src="@drawable/ic_thumb_down_empty_grey"
+            app:layout_constraintBottom_toBottomOf="@id/recycle_item_iv_avatar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/recycle_item_iv_avatar" />
+
+        <TextView
+            android:id="@+id/recycle_item_tv_thumb_up_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/recycle_item_comment_thumb_margin_end"
+            android:text="1847"
+            android:textSize="@dimen/recycle_item_comment_nickname_size"
+            app:layout_constraintBottom_toBottomOf="@id/recycle_item_iv_thumb_down"
+            app:layout_constraintEnd_toStartOf="@id/recycle_item_iv_thumb_down"
+            app:layout_constraintTop_toTopOf="@id/recycle_item_iv_thumb_down" />
+
+        <ImageView
+            android:layout_width="@dimen/recycle_item_comment_thumb_size"
+            android:layout_height="@dimen/recycle_item_comment_thumb_size"
+            android:layout_marginEnd="@dimen/recycle_item_comment_thumb_up_margin_end"
+            android:src="@drawable/ic_thumb_up"
+            app:layout_constraintBottom_toBottomOf="@id/recycle_item_tv_thumb_up_number"
+            app:layout_constraintEnd_toStartOf="@id/recycle_item_tv_thumb_up_number"
+            app:layout_constraintTop_toTopOf="@id/recycle_item_tv_thumb_up_number" />
+
+        <TextView
+            android:id="@+id/recycle_item_tv_content"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/recycle_item_comment_content_margin_top"
+            android:text="aklbvfiabfgon欧拉是免费的v里看到了v;a;owaign;oacvkaps[d'ovn;ealnmvkos;dainABFAKW;NVK"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="@id/recycle_item_iv_thumb_down"
+            app:layout_constraintStart_toStartOf="@id/recycle_item_tv_nickname"
+            app:layout_constraintTop_toBottomOf="@id/recycle_item_tv_comment_time" />
+
+        <include
+            android:id="@+id/include_comment"
+            layout="@layout/include_comment_comment"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/recycle_item_comment_content_margin_top"
+            app:layout_constraintEnd_toEndOf="@id/recycle_item_tv_content"
+            app:layout_constraintStart_toStartOf="@id/recycle_item_tv_content"
+            app:layout_constraintTop_toBottomOf="@id/recycle_item_tv_content" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/div_line_height"
+            android:layout_marginTop="@dimen/recycle_item_comment_content_margin_top"
+            android:background="@color/grey"
+            app:layout_constraintTop_toBottomOf="@id/include_comment" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

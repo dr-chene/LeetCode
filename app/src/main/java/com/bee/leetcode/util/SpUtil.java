@@ -14,7 +14,6 @@ public class SpUtil {
      */
     private volatile static SpUtil mInstance;
 
-
     private SharedPreferences sp;
     private SharedPreferences.Editor editor;
 
