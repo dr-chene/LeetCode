@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.bee.leetcode.net.BeanDemo;
+import com.bee.leetcode.repository.DataRequest;
 import com.bee.leetcode.repository.RepositoryDemo;
 
 /**
@@ -19,17 +20,17 @@ public class ViewModelDemo extends ViewModel {
         data = new MutableLiveData<>();
     }
 
-    public boolean refresh() {
-        return repository.login(new NetworkBoundResource.RequestSuccess<BeanDemo>() {
+    public void refresh(String account, String password) {
+        repository.login(account, password, new DataRequest.RequestSuccess<BeanDemo>(){
             @Override
-            public void dispatchValue(BeanDemo beanDemo) {
-                data.postValue(beanDemo);
+            public void dispatchValue(BeanDemo t) {
+                data.postValue(t);
             }
         });
     }
 
-    public boolean load(BeanDemo bean) {
-        return repository.load(new NetworkBoundResource.RequestSuccess<BeanDemo>() {
+    public void load(BeanDemo bean) {
+        repository.load(new DataRequest.RequestSuccess<BeanDemo>() {
             @Override
             public void dispatchValue(BeanDemo beanDemo) {
                 //我一般习惯将recyclerview的list传进来，与请求到的list合并再post到livedata中
