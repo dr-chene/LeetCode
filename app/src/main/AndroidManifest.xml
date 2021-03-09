@@ -3,6 +3,7 @@
     package="com.bee.leetcode">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:name=".App"
         android:allowBackup="true"
@@ -11,7 +12,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.LeetCode">
-        <activity android:name=".view.activity.MainActivity">
+        <activity android:name=".view.activity.CommentActivity"></activity>
+        <activity
+            android:name=".view.activity.MainActivity"
+            android:windowSoftInputMode="stateVisible|adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -23,9 +23,9 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
             // TODO: 2021/3/4 根据位置返回fragment
             switch (position){
                 case 0: //返回题库列表fragment
-                    return new ;
+//                    return new ;
                 case 1: //返回主页fragment
-                    return new ;
+//                    return new ;
                 default: throw new IllegalArgumentException("position can't be this value:" + position);
             }
         }

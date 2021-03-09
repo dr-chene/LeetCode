@@ -19,26 +19,10 @@ import static com.bee.leetcode.util.MapUtil.str2Json;
  * created by dr_chene on 2021/3/3
  * desc
  */
-public interface RequestCodeService {
+interface RequestCodeService {
 
     @POST("/user/requestcode")
     Single<BeanDemo> getCode(
             @Body RequestBody json
     );
-
-    /**
-     *
-     * @param method 获取验证码方式 {@link com.bee.leetcode.net.ServiceConstants}
-     * @param number method对应的phone或者email账号
-     */
-    default Single<BeanDemo> getCode(String method, String number){
-        JSONObject json = new JSONObject();
-        try {
-            json.put("method", method);
-            json.put("number", number);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return getCode(str2Json(json.toString()));
-    }
 }

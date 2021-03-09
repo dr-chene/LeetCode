@@ -10,6 +10,8 @@ import java.util.List;
 
 import io.reactivex.Completable;
 import io.reactivex.Flowable;
+import io.reactivex.Maybe;
+import io.reactivex.Single;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
@@ -39,11 +41,12 @@ public abstract class NetworkBoundResource<Remote, Local> {
 
     //从本地获取数据，无则返回null
     @MainThread
-    protected abstract Flowable<List<Local>> loadFromDb();
+    protected abstract Maybe<List<Local>> loadFromDb();
 
     //发起请求，获取远程数据
     @MainThread
-    protected abstract @NonNull io.reactivex.rxjava3.core.Single<ApiResponse<Remote>> createCall();
+    protected abstract @NonNull
+    io.reactivex.rxjava3.core.Single<ApiResponse<Remote>> createCall();
 
     //rxjava使用过程中发生的错误、异常
     protected void onFetchFailed(Throwable t) {
@@ -88,10 +91,13 @@ public abstract class NetworkBoundResource<Remote, Local> {
     //有更多数据是返回true，否则false
     //使用时千万注意调用的条件，否则就会陷入local，remote的无限循环调用
     //了解流程即可，不必深挖细节
+    //基本流程：如果有本地库，从本地库中加载数据，若没有可加载数据或者需要从远程同步数据，
+    // 则进行网络请求，并将得到的数据插入本地数据库
+    //否则直接进行网络请求
     public final boolean request(RequestSuccess<Local> success) {
         if (!isMore()) return false;
 //        Log.d(TAG, "request: more");
-        Flowable<List<Local>> local = loadFromDb();
+        Maybe<List<Local>> local = loadFromDb();
         if (local == null) netRequest(success);
         else localRequest = local.subscribeOn(Schedulers.io())
                 .observeOn(Schedulers.io())
@@ -126,7 +132,7 @@ public abstract class NetworkBoundResource<Remote, Local> {
                                         unSubscribe(insert);
                                         insert = null;
                                     }, this::onFetchFailed);
-                        else success.dispatchValue(remoteToLocal(remoteApiResponse.data));
+                        success.dispatchValue(remoteToLocal(remoteApiResponse.data));
                     } else {
                         apiResultError(remoteApiResponse.code, remoteApiResponse.message);
                     }

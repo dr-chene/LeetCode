@@ -28,12 +28,16 @@ public class RetrofitFactory {
     public static final Map<Integer, Retrofit> retrofitCacheMap = new HashMap<>();
     public static final int TYPE_NORMAL = 0;
 
+    public static <T> T createWithNormal(Class<T> service){
+        return create(TYPE_NORMAL).create(service);
+    }
+
     /**
      * @param type 要创建的retrofit对象种类
      * @return retrofit对象
      * @throws IllegalArgumentException 传入的type错误时抛出
      */
-    public static Retrofit create(int type) throws IllegalArgumentException {
+    private static Retrofit create(int type) throws IllegalArgumentException {
         switch (type) {
             case TYPE_NORMAL:
                 return createNormal();
