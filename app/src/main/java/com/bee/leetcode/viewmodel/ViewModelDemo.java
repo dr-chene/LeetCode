@@ -4,7 +4,6 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.bee.leetcode.net.BeanDemo;
-import com.bee.leetcode.repository.NetworkBoundResource;
 import com.bee.leetcode.repository.RepositoryDemo;
 
 /**
@@ -21,7 +20,7 @@ public class ViewModelDemo extends ViewModel {
     }
 
     public boolean refresh() {
-        return repository.refresh(new NetworkBoundResource.RequestSuccess<BeanDemo>() {
+        return repository.login(new NetworkBoundResource.RequestSuccess<BeanDemo>() {
             @Override
             public void dispatchValue(BeanDemo beanDemo) {
                 data.postValue(beanDemo);

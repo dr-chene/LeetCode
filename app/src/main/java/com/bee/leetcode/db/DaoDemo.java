@@ -18,7 +18,7 @@ import io.reactivex.Single;
 @Dao
 public interface DaoDemo {
 
-    Maybe<List<BeanDemo>> get();
+    Single<List<BeanDemo>> get();
 
     Completable save(BeanDemo t);
 }

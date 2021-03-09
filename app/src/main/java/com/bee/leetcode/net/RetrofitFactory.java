@@ -1,5 +1,7 @@
 package com.bee.leetcode.net;
 
+import com.bee.leetcode.util.SpUtil;
+
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -17,18 +19,21 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * desc 以工厂模式创建不同的Retrofit对象 但我们的项目中暂时只用到了一种Retrofit
  */
 public class RetrofitFactory {
+    private static final String TAG = "RetrofitFactory";
+
     //防止创建类对象
     private RetrofitFactory() {
     }
 
-    public static final String baseUrl = "http://81.71.89.149:9001/";
+    public static final String baseUrl = "https://bmft.tech/leetcode/";
     private static OkHttpClient baseClient = null;
+    private static String localToken = SpUtil.getInstance().getString("token", "");
 
     //存储retrofit对象
     public static final Map<Integer, Retrofit> retrofitCacheMap = new HashMap<>();
     public static final int TYPE_NORMAL = 0;
 
-    public static <T> T createWithNormal(Class<T> service){
+    public static <T> T createWithNormal(Class<T> service) {
         return create(TYPE_NORMAL).create(service);
     }
 
@@ -65,33 +70,40 @@ public class RetrofitFactory {
             synchronized (OkHttpClient.class) {
                 if (baseClient == null) {
                     baseClient = new OkHttpClient.Builder()
-                            .addInterceptor(new Interceptor() {
-                                @Override
-                                public Response intercept(Chain chain) throws IOException {
-                                    Request original = chain.request();
-                                    Request request = addHeaders(original).build();
-                                    return chain.proceed(request);
-                                }
-                            }).build();
+                            .addInterceptor(new ReceivedCookiesInterceptor())
+                            .addInterceptor(new AddCookiesInterceptor())
+                            .build();
                 }
             }
         }
         return baseClient;
     }
 
-    //为每次的请求添加header
-    private static Request.Builder addHeaders(Request request) {
-        return request.newBuilder()
-                .addHeader("token", token())
-                .addHeader("Content-Type", contentType());
+    private static class ReceivedCookiesInterceptor implements Interceptor {
+        @Override
+        public Response intercept(Chain chain) throws IOException {
+            Response originalResponse = chain.proceed(chain.request());
+
+            String token = originalResponse.header("token");
+            if (token != null && !token.isEmpty() && !token.equals(localToken)) {
+                synchronized (this) {
+                    SpUtil.getInstance().putString("token", token);
+                    localToken = token;
+                }
+            }
+
+            return originalResponse;
+        }
     }
 
-    private static String token() {
-        // TODO: 2021/2/6 return token ;
-        return "";
-    }
+    private static class AddCookiesInterceptor implements Interceptor {
 
-    private static String contentType() {
-        return "application/json;charset=UTF-8";
+        @Override
+        public Response intercept(Chain chain) throws IOException {
+            Request.Builder builder = chain.request().newBuilder();
+            builder.addHeader("token", localToken);
+            builder.addHeader("baseUrl", "https://bmft.tech/leetcode");
+            return chain.proceed(builder.build());
+        }
     }
 }

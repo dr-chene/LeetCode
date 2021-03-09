@@ -4,67 +4,68 @@ import androidx.annotation.NonNull;
 
 import com.bee.leetcode.db.DaoDemo;
 import com.bee.leetcode.net.BeanDemo;
-import com.bee.leetcode.net.service.ServiceDemo;
+import com.bee.leetcode.net.service.LoginServiceProxy;
+import com.bee.leetcode.util.SpUtil;
 
 import java.util.List;
 
 import io.reactivex.Completable;
-import io.reactivex.Maybe;
+import io.reactivex.rxjava3.core.Single;
 
 /**
  * created by dr_chene on 2021/2/19
  * desc 网络框架示例repository部分
  */
-public class RepositoryDemo extends NetworkBoundResource<BeanDemo, BeanDemo> {
-    private final ServiceDemo api;
+public class RepositoryDemo {
+    private final LoginServiceProxy api;
     private final DaoDemo local;
 
-    public RepositoryDemo(ServiceDemo api, DaoDemo local) {
-        this.api = api;
+    public RepositoryDemo(DaoDemo local) {
+        api = new LoginServiceProxy();
         this.local = local;
     }
 
-    public boolean refresh(RequestSuccess<BeanDemo> success) {
-        return request(success);
+    public void login(String account, String password, DataRequest.RequestSuccess<BeanDemo> success) {
+        DataRequest.request(new DataRequest.RemoteOption<BeanDemo, BeanDemo>() {
+            @NonNull
+            @Override
+            public Single<DataRequest.ApiResponse<BeanDemo>> get() {
+                return api.login(account, password, "email");
+            }
+
+            @Override
+            public BeanDemo remoteToLocal(BeanDemo t) {
+                return t;
+            }
+        }, localOption, success);
     }
 
-    public boolean load(RequestSuccess<BeanDemo> success) {
-        return request(success);
+    public void load(DataRequest.RequestSuccess<BeanDemo> success) {
+        DataRequest.request(remoteOption, localOption, success);
     }
 
-    @Override
-    protected Completable saveCallResult(BeanDemo item) {
-        return local.save(item);
-    }
+    private final DataRequest.RemoteOption<BeanDemo, BeanDemo> remoteOption = new DataRequest.RemoteOption<BeanDemo, BeanDemo>() {
+        @NonNull
+        @Override
+        public Single<DataRequest.ApiResponse<BeanDemo>> get() {
+            return api.login("", "", "");
+        }
 
-    @Override
-    protected boolean shouldFetch(BeanDemo data) {
-        return false;
-    }
+        @Override
+        public BeanDemo remoteToLocal(BeanDemo t) {
+            return t;
+        }
+    };
+    private final DataRequest.LocalOption<BeanDemo> localOption = new DataRequest.LocalOption<BeanDemo>() {
+        @Override
+        public Completable save(BeanDemo data) {
+            SpUtil.getInstance().putString("user", data.toString());//一种存储方式
+            return local.save(data);//另一种存储方式
+        }
 
-    @Override
-    protected Maybe<List<BeanDemo>> loadFromDb() {
-        return local.get();
-    }
-
-    @NonNull
-    @Override
-    protected io.reactivex.rxjava3.core.Single<ApiResponse<BeanDemo>> createCall() {
-        return api.getRemoteData();
-    }
-
-    @Override
-    protected boolean isApiRequestSuccess(ApiResponse<BeanDemo> beanDemoApiResponse) {
-        return beanDemoApiResponse.code == 200;
-    }
-
-    @Override
-    protected BeanDemo remoteToLocal(BeanDemo beanDemo) {
-        return beanDemo;
-    }
-
-    @Override
-    public void apiResultError(int error, String message) {
-
-    }
+        @Override
+        public io.reactivex.Single<List<BeanDemo>> get() {
+            return local.get();
+        }
+    };
 }

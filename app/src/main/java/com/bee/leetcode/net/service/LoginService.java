@@ -1,6 +1,7 @@
 package com.bee.leetcode.net.service;
 
 import com.bee.leetcode.net.BeanDemo;
+import com.bee.leetcode.repository.DataRequest;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -19,7 +20,7 @@ import static com.bee.leetcode.util.MapUtil.str2Json;
 interface LoginService {
 
     @POST("/user/login")
-    Single<BeanDemo> login(
+    Single<DataRequest.ApiResponse<BeanDemo>> login(
             @Body RequestBody json
     );
 }
