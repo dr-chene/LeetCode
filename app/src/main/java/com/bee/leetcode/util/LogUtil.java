@@ -14,7 +14,7 @@ public class LogUtil {
     //总开关控制打印等级
     public static final int LEVEL = VERBOSE;
     //控制在debug模式下打印，release模式下不打印
-    public static final boolean IS_DEBUG = BuildConfig.LOG_DEBUG;
+    public static final boolean IS_DEBUG = BuildConfig.DEBUG;
     //默认TAG
     public static final String TAG = "Bee";
 
