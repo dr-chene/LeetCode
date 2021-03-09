@@ -6,8 +6,12 @@ import android.view.ViewGroup;
 
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
+
+import com.bee.leetcode.base.BaseBindingAdapter;
+
 //使用BaseBindingAdapter的举列子
-public class MainActivityAdapter extends BaseBindingAdapter<ShowDataBeans,BaseBindingAdapter.ViewHolder>{
+//ShowDataBeans显示找不到，不过以为是示例所以没影响 --yc
+public class MainActivityAdapter extends BaseBindingAdapter<ShowDataBeans,BaseBindingAdapter.ViewHolder> {
     public MainActivityAdapter(Context context){
         super(context);
     }
