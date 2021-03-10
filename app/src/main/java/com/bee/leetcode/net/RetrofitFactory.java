@@ -1,5 +1,7 @@
 package com.bee.leetcode.net;
 
+import androidx.annotation.NonNull;
+
 import com.bee.leetcode.util.SpUtil;
 
 import java.io.IOException;
@@ -80,6 +82,7 @@ public class RetrofitFactory {
     }
 
     private static class ReceivedCookiesInterceptor implements Interceptor {
+        @NonNull
         @Override
         public Response intercept(Chain chain) throws IOException {
             Response originalResponse = chain.proceed(chain.request());
@@ -97,7 +100,7 @@ public class RetrofitFactory {
     }
 
     private static class AddCookiesInterceptor implements Interceptor {
-
+        @NonNull
         @Override
         public Response intercept(Chain chain) throws IOException {
             Request.Builder builder = chain.request().newBuilder();
