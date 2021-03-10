@@ -8,6 +8,7 @@ import android.view.Menu;
 import com.bee.leetcode.R;
 import com.bee.leetcode.base.BaseActivity;
 import com.bee.leetcode.databinding.ActivityCommentBinding;
+import com.bee.leetcode.viewmodel.ViewModelDemo;
 
 public class CommentActivity extends BaseActivity<ActivityCommentBinding> {
 

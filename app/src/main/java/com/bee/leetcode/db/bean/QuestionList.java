@@ -1,6 +1,8 @@
 package com.bee.leetcode.db.bean;
 
 import androidx.annotation.NonNull;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -8,19 +10,19 @@ import com.google.gson.annotations.SerializedName;
  * created by dr_chene on 2021/3/10
  * desc
  */
-public class QuestionListAndTag {
-    @SerializedName(value = "listId", alternate = "tagId")
-    public long id;
-    @SerializedName(value = "listName", alternate = "tagName")
-    public String name;
+@Entity(tableName = "question_lists")
+public class QuestionList {
+    @PrimaryKey
+    public long listId;
+    public String listName;
     public int deleted;
 
     @NonNull
     @Override
     public String toString() {
-        return "QuestionListAndTag{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
+        return "QuestionList{" +
+                "listId=" + listId +
+                ", listName='" + listName + '\'' +
                 ", deleted=" + deleted +
                 '}';
     }

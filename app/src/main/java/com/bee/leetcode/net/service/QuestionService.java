@@ -4,7 +4,7 @@ import com.bee.leetcode.db.bean.ApiResponse;
 import com.bee.leetcode.db.bean.PageData;
 import com.bee.leetcode.db.bean.Question;
 import com.bee.leetcode.db.bean.QuestionDetail;
-import com.bee.leetcode.db.bean.QuestionListAndTag;
+import com.bee.leetcode.db.bean.QuestionList;
 
 import java.util.List;
 
@@ -48,10 +48,10 @@ public interface QuestionService {
     );
 
     @GET("question/get-list")
-    Single<ApiResponse<List<QuestionListAndTag>>> getQuestionCategories();
+    Single<ApiResponse<List<QuestionList>>> getQuestionCategories();
 
     @GET("question/get-tag")
-    Single<ApiResponse<List<QuestionListAndTag>>> getQuestionTags();
+    Single<ApiResponse<List<QuestionList>>> getQuestionTags();
 
     /**
      * @return 随机返回题目详情

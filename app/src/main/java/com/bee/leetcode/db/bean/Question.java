@@ -3,8 +3,12 @@ package com.bee.leetcode.db.bean;
 //提交记录接口中的Array中的字段
 
 import androidx.annotation.NonNull;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
+@Entity(tableName = "questions")
 public class Question {
+    @PrimaryKey
     public long questionId;
     public String title;
     public int answerNum;

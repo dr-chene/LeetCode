@@ -3,7 +3,7 @@ package com.bee.leetcode.net.service;
 import com.bee.leetcode.db.bean.ApiResponse;
 import com.bee.leetcode.db.bean.PageData;
 import com.bee.leetcode.db.bean.Question;
-import com.bee.leetcode.db.bean.QuestionListAndTag;
+import com.bee.leetcode.db.bean.QuestionList;
 import com.bee.leetcode.net.RetrofitFactory;
 
 import org.json.JSONException;
@@ -47,12 +47,12 @@ public class QuestionServiceProxy {
     }
 
     //获取问题分类信息
-    public Single<ApiResponse<List<QuestionListAndTag>>> getQuestionCategories() {
+    public Single<ApiResponse<List<QuestionList>>> getQuestionCategories() {
         return api.getQuestionCategories();
     }
 
     //获取问题标签信息
-    public Single<ApiResponse<List<QuestionListAndTag>>> getQuestionTags() {
+    public Single<ApiResponse<List<QuestionList>>> getQuestionTags() {
         return api.getQuestionTags();
     }
 }

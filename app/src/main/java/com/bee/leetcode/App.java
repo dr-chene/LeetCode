@@ -2,6 +2,7 @@ package com.bee.leetcode;
 
 import android.app.Application;
 
+import com.bee.leetcode.db.AppDataBase;
 import com.bee.leetcode.util.SpUtil;
 
 public class App extends Application {
@@ -12,5 +13,6 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
         SpUtil.getInstance().initSp(getApplicationContext());
+        AppDataBase.init(getApplicationContext());
     }
 }

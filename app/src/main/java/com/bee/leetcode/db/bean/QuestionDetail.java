@@ -3,6 +3,8 @@ package com.bee.leetcode.db.bean;
 //题目列表展示接口中的Array部分
 
 import androidx.annotation.NonNull;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
 import com.google.gson.annotations.SerializedName;
 
