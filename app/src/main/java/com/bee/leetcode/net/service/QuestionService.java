@@ -1,15 +1,18 @@
 package com.bee.leetcode.net.service;
 
-import com.bee.leetcode.net.BeanDemo;
+import com.bee.leetcode.db.bean.ApiResponse;
+import com.bee.leetcode.db.bean.PageData;
+import com.bee.leetcode.db.bean.Question;
+import com.bee.leetcode.db.bean.QuestionDetail;
+import com.bee.leetcode.db.bean.QuestionListAndTag;
+
+import java.util.List;
 
 import io.reactivex.rxjava3.core.Single;
 import okhttp3.RequestBody;
+import retrofit2.http.Body;
 import retrofit2.http.GET;
-import retrofit2.http.Multipart;
-import retrofit2.http.Part;
-import retrofit2.http.Query;
-
-import static com.bee.leetcode.util.MapUtil.str2Form;
+import retrofit2.http.Path;
 
 /**
  * created by dr_chene on 2021/2/6
@@ -39,31 +42,26 @@ public interface QuestionService {
     String TAG_TREE = "tree";
     String TAG_OPERATION = "operation";
 
-    @Multipart
-    @GET("/question/all")
-    Single<BeanDemo> getQuestions(
-            @Part("list") RequestBody list,
-            @Part("difficulty") RequestBody difficulty,
-            @Part("state") RequestBody state,
-            @Part("tag") RequestBody tag,
-            @Part("page-num") RequestBody pageNum,
-            @Part("page") RequestBody page,
-            @Part("keyword") RequestBody keyword
+    @GET("question/question/all")
+    Single<ApiResponse<PageData<Question>>> getQuestions(
+            @Body RequestBody json
     );
 
-    /**
-     * @param list    请求的问题的类型分组
-     * @param pageNum 每页问题的数量
-     */
-    default Single<BeanDemo> getQuestions(String list, String difficulty, String state, String tag, int pageNum, int page, String keyword) {
-        return getQuestions(str2Form(list), str2Form(difficulty), str2Form(state), str2Form(tag), str2Form(pageNum + ""), str2Form(page + ""), str2Form(keyword));
-    }
+    @GET("question/get-list")
+    Single<ApiResponse<List<QuestionListAndTag>>> getQuestionCategories();
+
+    @GET("question/get-tag")
+    Single<ApiResponse<List<QuestionListAndTag>>> getQuestionTags();
 
     /**
-     * @return 返回题目详情
+     * @return 随机返回题目详情
      */
-    @GET("/question/start")
-    Single<BeanDemo> startQuestion(
-            @Query("questionId") String questionId
-    );
+    @GET("question/start/random")
+    Single<ApiResponse<QuestionDetail>> startQuestion();
+
+    /**
+     * @return 按questionId返回题目详情
+     */
+    @GET("question/start/{questionId}")
+    Single<ApiResponse<QuestionDetail>> startQuestion(@Path("questionId") long questionId);
 }

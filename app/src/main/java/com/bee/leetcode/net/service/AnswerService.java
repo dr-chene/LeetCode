@@ -19,7 +19,8 @@ public interface AnswerService {
             @Query("answerId") String answerId
     );
 
-    @GET("/answerList/questionId")
+    // TODO: 2021/3/10 暂无可用接口
+    @GET("answer/all")
     Single<BeanDemo> getQuestionAnswers(
             @Query("questionId") String questionId
     );

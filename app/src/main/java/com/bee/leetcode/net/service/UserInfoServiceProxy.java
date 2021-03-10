@@ -1,6 +1,6 @@
 package com.bee.leetcode.net.service;
 
-import com.bee.leetcode.net.BeanDemo;
+import com.bee.leetcode.db.bean.ApiResponse;
 import com.bee.leetcode.net.RetrofitFactory;
 import com.bee.leetcode.net.ServiceConstants;
 
@@ -19,7 +19,7 @@ public class UserInfoServiceProxy {
 
     private final UserInfoService api;
 
-    public UserInfoServiceProxy(){
+    public UserInfoServiceProxy() {
         api = RetrofitFactory.createWithNormal(UserInfoService.class);
     }
 
@@ -27,7 +27,7 @@ public class UserInfoServiceProxy {
      * @param sex    1 boy, 0 girl
      * @param avatar 头像地址，通过上传头像接口获得
      */
-    public Single<BeanDemo> updateBaseInfo(String nickname, int sex, String avatar, String password) {
+    public Single<ApiResponse<String>> updateBaseInfo(String nickname, int sex, String avatar, String password) {
         JSONObject json = new JSONObject();
         try {
             json.put("nickname", nickname);
@@ -43,7 +43,7 @@ public class UserInfoServiceProxy {
     /**
      * @param method {@link ServiceConstants}中method常量
      */
-    public Single<BeanDemo> updateAccountInfo(String method, String code, String oldAccount, String newAccount) {
+    public Single<ApiResponse<String>> updateAccountInfo(String method, String code, String oldAccount, String newAccount) {
         JSONObject json = new JSONObject();
         try {
             json.put("newAccount", newAccount);

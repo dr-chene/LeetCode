@@ -4,6 +4,8 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import com.bee.leetcode.db.bean.ApiResponse;
+
 import java.util.List;
 
 import io.reactivex.Completable;
@@ -108,7 +110,7 @@ public class DataRequest {
                         if (otherWaySave) localOption.saveSuccess();
                         success.dispatchValue(remoteOption.remoteToLocal(remoteApiResponse.data));
                     } else {
-                        remoteOption.remoteResultError(remoteApiResponse.code, remoteApiResponse.message);
+                        remoteOption.remoteResultFailed(remoteApiResponse.code, remoteApiResponse.message);
                     }
                     if (apiRequest != null && !apiRequest.isDisposed()) {
                         apiRequest.dispose();
@@ -117,15 +119,8 @@ public class DataRequest {
                 }, error::onError);
     }
 
-    //返回的网络数据格式
-    public static class ApiResponse<T> {
-        public T data;
-        public int code;
-        public String message;
-    }
-
     public interface RequestSuccess<Local> {
-        void dispatchValue(Local data);
+        void dispatchValue(Local result);
     }
 
     public interface RequestError {
@@ -139,7 +134,7 @@ public class DataRequest {
         private Transfer<Remote, Local> transfer = null;
         private Fun1<ApiResponse<Remote>> isResponseSuccess = null;
         private Fun1<Remote> remoteRequestSuccessListener = null;
-        private Fun2<Integer, String> remoteResultErrorListener = null;
+        private Fun2<Integer, String> remoteResultFailedListener = null;
 
         public RemoteOption<Remote, Local> setRemoteGet(Single<ApiResponse<Remote>> remoteGet) {
             this.remoteGet = remoteGet;
@@ -161,8 +156,8 @@ public class DataRequest {
             return this;
         }
 
-        public RemoteOption<Remote, Local> setRemoteResultErrorListener(Fun2<Integer, String> remoteResultError) {
-            this.remoteResultErrorListener = remoteResultError;
+        public RemoteOption<Remote, Local> setRemoteResultFailedListener(Fun2<Integer, String> remoteResultFailed) {
+            this.remoteResultFailedListener = remoteResultFailed;
             return this;
         }
 
@@ -190,10 +185,11 @@ public class DataRequest {
             if (remoteRequestSuccessListener != null) remoteRequestSuccessListener.run(t);
         }
 
-        //网络获取数据异常回调
-        private void remoteResultError(int code, String message) {
-            if (remoteResultErrorListener != null) remoteResultErrorListener.run(code, message);
+        //网络获取数据失败回调
+        private void remoteResultFailed(int code, String message) {
+            if (remoteResultFailedListener != null) remoteResultFailedListener.run(code, message);
         }
+
     }
 
     public static final class LocalOption<Local> {
@@ -248,9 +244,10 @@ public class DataRequest {
             return otherWayToSave == null || otherWayToSave.run(data);
         }
 
-        //根据本地数据判断是否需要从远端获取数据
+        //根据本地数据判断是否需要从远端获取数据，默认不需要
         private boolean shouldFetch(Local t) {
-            return shouldFetch == null || shouldFetch.run(t);
+            if (shouldFetch == null) return false;
+            else return shouldFetch.run(t);
         }
 
         //数据成功保存至本地回调

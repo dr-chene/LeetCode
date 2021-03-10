@@ -1,8 +1,8 @@
 package com.bee.leetcode.net.service;
 
-import com.bee.leetcode.net.BeanDemo;
+import com.bee.leetcode.db.bean.ApiResponse;
+import com.bee.leetcode.db.bean.User;
 import com.bee.leetcode.net.RetrofitFactory;
-import com.bee.leetcode.repository.DataRequest;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -19,14 +19,14 @@ public class LoginServiceProxy {
 
     private final LoginService api;
 
-    public LoginServiceProxy(){
+    public LoginServiceProxy() {
         api = RetrofitFactory.createWithNormal(LoginService.class);
     }
 
     /**
      * 参数与{@link RegisterService}含义一致
      */
-    public Single<DataRequest.ApiResponse<BeanDemo>> login(String registerBody, String password, String method){
+    public Single<ApiResponse<User>> login(String registerBody, String password, String method) {
         JSONObject json = new JSONObject();
         try {
             json.put("registerBody", registerBody);

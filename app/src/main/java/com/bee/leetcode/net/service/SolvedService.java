@@ -1,6 +1,7 @@
 package com.bee.leetcode.net.service;
 
-import com.bee.leetcode.net.BeanDemo;
+import com.bee.leetcode.db.bean.ApiResponse;
+import com.bee.leetcode.db.bean.Solved;
 
 import io.reactivex.rxjava3.core.Single;
 import retrofit2.http.GET;
@@ -11,6 +12,6 @@ import retrofit2.http.GET;
  */
 public interface SolvedService {
 
-    @GET("/user/answer")
-    Single<BeanDemo> getSolved();
+    @GET("question/user/answer")
+    Single<ApiResponse<Solved>> getSolved();
 }

@@ -1,6 +1,6 @@
 package com.bee.leetcode.net.service;
 
-import com.bee.leetcode.net.BeanDemo;
+import com.bee.leetcode.db.bean.ApiResponse;
 import com.bee.leetcode.net.RetrofitFactory;
 
 import org.json.JSONException;
@@ -24,9 +24,9 @@ public class ForgetServiceProxy {
 
     /**
      * @param method,forGetBody 与{@link RegisterService}一致
-     * @param code              发送的验证码
+     * @param code              发送的验证码，更改之前需要请求发送验证码
      */
-    public Single<BeanDemo> forget(String method, String forGetBody, String code, String newPassword) {
+    public Single<ApiResponse<String>> forget(String method, String forGetBody, String code, String newPassword) {
         JSONObject json = new JSONObject();
         try {
             json.put("forGetBody", forGetBody);

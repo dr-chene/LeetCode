@@ -1,15 +1,11 @@
 package com.bee.leetcode.net.service;
 
-import com.bee.leetcode.net.BeanDemo;
+import com.bee.leetcode.db.bean.ApiResponse;
 
 import io.reactivex.rxjava3.core.Single;
 import okhttp3.RequestBody;
 import retrofit2.http.Body;
-import retrofit2.http.Multipart;
 import retrofit2.http.POST;
-import retrofit2.http.Part;
-
-import static com.bee.leetcode.util.MapUtil.str2Form;
 
 /**
  * created by dr_chene on 2021/2/5
@@ -17,8 +13,8 @@ import static com.bee.leetcode.util.MapUtil.str2Form;
  */
 public interface ForgetService {
 
-    @POST("/user/forget")
-    Single<BeanDemo> forget(
+    @POST("user/forget")
+    Single<ApiResponse<String>> forget(
             @Body RequestBody json
     );
 }

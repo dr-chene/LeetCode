@@ -1,6 +1,10 @@
 package com.bee.leetcode.net.service;
 
+import com.bee.leetcode.db.bean.ApiResponse;
+import com.bee.leetcode.db.bean.Commit;
 import com.bee.leetcode.net.BeanDemo;
+
+import java.util.List;
 
 import io.reactivex.rxjava3.core.Single;
 import retrofit2.http.Body;
@@ -18,11 +22,12 @@ public interface CommitService {
 //            @Body String questionId
 //    );
 
-//    @POST("/commit/all")
-//    Single<BeanDemo> getQuestionHistories(
-//            @Body String questionId
-//    );
+    // TODO: 2021/3/10 暂无可用接口
+    @POST("commit/questionId")
+    Single<BeanDemo> getQuestionHistories(
+            @Body String questionId
+    );
 
-    @POST("/user/commit/all")
-    Single<BeanDemo> getUserHistories();
+    @POST("user/user/commit/all")
+    Single<ApiResponse<List<Commit>>> getCommitHistories();
 }

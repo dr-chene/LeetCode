@@ -3,6 +3,7 @@ package com.bee.leetcode.base;
 import android.content.Context;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
 import androidx.databinding.ViewDataBinding;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -10,40 +11,41 @@ import java.util.ArrayList;
 import java.util.List;
 
 //上拉进行加载，下拉刷新进行封装
-public abstract class BaseBindingAdapter<T,VH extends RecyclerView.ViewHolder> extends RecyclerView.Adapter<VH> {
+public abstract class BaseBindingAdapter<T, VH extends RecyclerView.ViewHolder> extends RecyclerView.Adapter<VH> {
     public List<T> mDataList;
     public Context mContext;
 
-    public static class ViewHolder extends RecyclerView.ViewHolder{
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         ViewDataBinding mDataBinding;
 
-        public ViewHolder(ViewDataBinding binding){
+        public ViewHolder(ViewDataBinding binding) {
             super(binding.getRoot());
-            mDataBinding=binding;
+            mDataBinding = binding;
         }
 
-        public ViewDataBinding getBinding(){
+        public ViewDataBinding getBinding() {
             return mDataBinding;
         }
     }
 
-    public BaseBindingAdapter(Context context){
-        mContext=context;
-        mDataList=new ArrayList<>();
+    public BaseBindingAdapter(Context context) {
+        mContext = context;
+        mDataList = new ArrayList<>();
+    }
+
+    @NonNull
+    @Override
+    public VH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        return onCreateVH(parent, viewType);
     }
 
     @Override
-    public VH onCreateViewHolder(ViewGroup parent,int viewType){
-        return onCreateVH(parent,viewType);
+    public void onBindViewHolder(@NonNull VH holder, int position) {
+        onBindVH(holder, position);
     }
 
     @Override
-    public void onBindViewHolder(VH holder,int position){
-        onBindVH(holder,position);
-    }
-
-    @Override
-    public int getItemCount(){
+    public int getItemCount() {
         return mDataList.size();
     }
 
@@ -63,5 +65,6 @@ public abstract class BaseBindingAdapter<T,VH extends RecyclerView.ViewHolder> e
     }
 
     public abstract VH onCreateVH(ViewGroup parent, int viewType);
+
     public abstract void onBindVH(VH holder, int position);
 }

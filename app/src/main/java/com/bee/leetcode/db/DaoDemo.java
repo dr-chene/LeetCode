@@ -2,13 +2,11 @@ package com.bee.leetcode.db;
 
 import androidx.room.Dao;
 
-import com.bee.leetcode.net.BeanDemo;
+import com.bee.leetcode.db.bean.User;
 
 import java.util.List;
 
 import io.reactivex.Completable;
-import io.reactivex.Flowable;
-import io.reactivex.Maybe;
 import io.reactivex.Single;
 
 /**
@@ -18,7 +16,7 @@ import io.reactivex.Single;
 @Dao
 public interface DaoDemo {
 
-    Single<List<BeanDemo>> get();
+    Single<List<User>> get();
 
-    Completable save(BeanDemo t);
+    Completable save(User t);
 }

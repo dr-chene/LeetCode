@@ -1,6 +1,6 @@
 package com.bee.leetcode.net.service;
 
-import com.bee.leetcode.net.BeanDemo;
+import com.bee.leetcode.db.bean.ApiResponse;
 import com.bee.leetcode.net.RetrofitFactory;
 import com.bee.leetcode.net.ServiceConstants;
 
@@ -19,17 +19,15 @@ public class RegisterServiceProxy {
 
     private final RegisterService api;
 
-    public RegisterServiceProxy(){
+    public RegisterServiceProxy() {
         api = RetrofitFactory.createWithNormal(RegisterService.class);
     }
 
     /**
-     *
-     * @param method {@link ServiceConstants}中method常量
+     * @param method       {@link ServiceConstants}中method常量
      * @param registerBody method对应的phone或email账号
-     *
      */
-    public Single<BeanDemo> register(String registerBody, String password, int authCode, String method){
+    public Single<ApiResponse<String>> register(String registerBody, String password, int authCode, String method) {
         JSONObject json = new JSONObject();
         try {
             json.put("registerBody", registerBody);
