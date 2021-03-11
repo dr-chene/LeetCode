@@ -1,4 +1,4 @@
-package com.bee.leetcode;
+package com.bee.leetcode.adapter;
 
 import android.content.Context;
 import android.view.ViewGroup;
@@ -9,12 +9,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
-//上拉进行加载，下拉刷新进行封装
+//上拉加载，下拉刷新进行封装
 public abstract class BaseBindingAdapter<T,VH extends RecyclerView.ViewHolder> extends RecyclerView.Adapter<VH> {
     public List<T> mDataList;
     public Context mContext;
 
-    static class ViewHolder extends RecyclerView.ViewHolder{
+    public static class ViewHolder extends RecyclerView.ViewHolder{
         ViewDataBinding mDataBinding;
 
         public ViewHolder(ViewDataBinding binding){
@@ -46,7 +46,7 @@ public abstract class BaseBindingAdapter<T,VH extends RecyclerView.ViewHolder> e
     public int getItemCount(){
         return mDataList.size();
     }
-
+//刷新数据
     public void onRefreshData(List<T> list) {
         if (mDataList != null) {
             mDataList.clear();
