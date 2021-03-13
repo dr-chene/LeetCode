@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintEnd_toEndOf="@+id/activity_question_trying"
+        app:layout_constraintStart_toEndOf="@+id/activity_question_trying">
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="411dp"
+            android:layout_height="120dp"
+            android:layout_marginTop="1dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/activity_question_trying"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="14dp"
+            android:layout_marginRight="14dp"
+            android:text="0"
+            android:textColor="@color/black"
+            android:textSize="35dp"
+            app:layout_constraintBottom_toBottomOf="@+id/activity_question_notry"
+            app:layout_constraintEnd_toEndOf="@+id/activity_question_two"
+            app:layout_constraintTop_toTopOf="@+id/activity_question_notry" />
+
+        <TextView
+            android:id="@+id/activity_question_passed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="4dp"
+            android:layout_marginRight="4dp"
+            android:text="0"
+            android:textColor="@color/black"
+            android:textSize="35dp"
+            app:layout_constraintBottom_toBottomOf="@+id/activity_question_trying"
+            app:layout_constraintEnd_toEndOf="@+id/activity_question_one"
+            app:layout_constraintTop_toTopOf="@+id/activity_question_trying"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/activity_question_notry"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="56dp"
+            android:layout_marginRight="56dp"
+            android:layout_marginBottom="14dp"
+            android:text="1999"
+            android:textColor="@color/black"
+            android:textSize="35dp"
+            app:layout_constraintBottom_toTopOf="@+id/activity_question_three"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/activity_question_one"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="44dp"
+            android:layout_marginLeft="44dp"
+            android:layout_marginTop="28dp"
+            android:text="已通过"
+            android:textColor="@color/grey_dark"
+            android:textSize="15dp"
+            app:layout_constraintStart_toStartOf="@+id/view"
+            app:layout_constraintTop_toBottomOf="@+id/activity_question_passed" />
+
+        <TextView
+            android:id="@+id/activity_question_two"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="69dp"
+            android:layout_marginLeft="69dp"
+            android:layout_marginEnd="70dp"
+            android:layout_marginRight="70dp"
+            android:layout_marginBottom="6dp"
+            android:text="尝试中"
+            android:textColor="@color/grey_dark"
+            android:textSize="15dp"
+            app:layout_constraintBottom_toBottomOf="@+id/view"
+            app:layout_constraintEnd_toStartOf="@+id/activity_question_three"
+            app:layout_constraintStart_toEndOf="@+id/activity_question_passed" />
+
+        <TextView
+            android:id="@+id/activity_question_three"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="17dp"
+            android:layout_marginRight="17dp"
+            android:layout_marginBottom="7dp"
+            android:text="未尝试"
+            android:textColor="@color/grey_dark"
+            android:textSize="15dp"
+            app:layout_constraintBottom_toBottomOf="@+id/view"
+            app:layout_constraintEnd_toEndOf="@+id/activity_question_notry" />
+
+        <View
+            android:id="@+id/activity_question_div_top"
+            android:layout_width="411dp"
+            android:layout_height="0.3dp"
+            app:layout_constraintBottom_toBottomOf="@+id/view"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view" />
+
+        <View
+            android:id="@+id/activity_question_show_type"
+            android:layout_width="411dp"
+            android:layout_height="50dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view" />
+
+        <ImageView
+            android:id="@+id/activity_question_iv_sort"
+            android:layout_width="34dp"
+            android:layout_height="33dp"
+            android:src="@drawable/ic_sort_grey"
+            app:layout_constraintBottom_toBottomOf="@+id/activity_question_type"
+            app:layout_constraintEnd_toEndOf="@+id/activity_question_show_type"
+            app:layout_constraintStart_toEndOf="@+id/activity_question_type"
+            app:layout_constraintTop_toTopOf="@+id/activity_question_type" />
+
+        <TextView
+            android:id="@+id/activity_question_diffcuity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginBottom="8dp"
+            android:text="难度"
+            android:textSize="15dp"
+            app:layout_constraintBottom_toBottomOf="@+id/activity_question_show_type"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/activity_question_staut"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginBottom="7dp"
+            android:text="状态"
+            android:textSize="15dp"
+            app:layout_constraintBottom_toBottomOf="@+id/activity_question_show_type"
+            app:layout_constraintStart_toEndOf="@+id/activity_question_diffcuity" />
+
+        <TextView
+            android:id="@+id/activity_question_list"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="7dp"
+            android:text="列表"
+            android:textSize="15dp"
+            app:layout_constraintBottom_toBottomOf="@+id/activity_question_show_type"
+            app:layout_constraintEnd_toEndOf="@+id/activity_question_two" />
+
+        <TextView
+            android:id="@+id/activity_question_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginBottom="8dp"
+            android:text="标签"
+            android:textSize="15dp"
+            app:layout_constraintBottom_toBottomOf="@+id/activity_question_show_type"
+            app:layout_constraintStart_toEndOf="@+id/activity_question_two" />
+
+        <View
+            android:id="@+id/activity_question_top_content"
+            android:layout_width="411dp"
+            android:layout_height="0.3dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/activity_question_show_type" />
+
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/activity_question_swipe"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="50dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/activity_question_show_type">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:listitem="@layout/recycle_item_question" />
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+        <include
+            android:id="@+id/include_main"
+            layout="@layout/activity_main" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
