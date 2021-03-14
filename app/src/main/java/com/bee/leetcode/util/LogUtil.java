@@ -2,7 +2,8 @@ package com.bee.leetcode.util;
 
 import android.util.Log;
 
-import com.bee.leetcode.BuildConfig;
+import androidx.databinding.library.baseAdapters.BuildConfig;
+
 
 public class LogUtil {
     public static final int VERBOSE = 1;
